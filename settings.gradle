@@ -1,2 +1,3 @@
+include ':temperatureGauge'
 include ':app'
 rootProject.name = "TemperatureGauge"
