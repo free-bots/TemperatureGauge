@@ -140,6 +140,8 @@ class TemperatureGauge : View {
         val downOffset = percentageOfSize(35F)
         getDrawableOfTemperature(temperature)?.let {
 
+            it.colorFilter = null
+
             if (tintIcons) {
                 it.colorFilter =
                     PorterDuffColorFilter(
