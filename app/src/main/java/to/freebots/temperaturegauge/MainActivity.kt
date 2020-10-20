@@ -34,6 +34,16 @@ class MainActivity : AppCompatActivity() {
 
         gauge.tintIcons = true // tint icons with the color of the configuration
 
+        // define your color scheme here
+//        gauge.gaugeBackgroundColor = Color.DKGRAY
+//        gauge.temperatureTextColor = Color.YELLOW
+//        gauge.temperatureArcBackgroundColor = Color.WHITE
+
+        // change the rendered text of the gauge
+//        gauge.temperatureRender = object : TemperatureGauge.TemperatureRender {
+//            override fun renderText(temperature: Float): String = "$temperature °C :)"
+//        }
+
         gauge.config = arrayListOf(
             TemperatureRangeConfig(
                 30F, // max temperature of the range

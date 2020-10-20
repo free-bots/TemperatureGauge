@@ -51,6 +51,28 @@ class TemperatureGauge : View {
             invalidate()
         }
 
+    var gaugeBackgroundColor: Int = Color.BLACK
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var temperatureArcBackgroundColor: Int = Color.GRAY
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var temperatureTextColor: Int = Color.WHITE
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var temperatureRender: TemperatureRender = object : TemperatureRender {
+        override fun renderText(temperature: Float): String = "${temperature}°C"
+    }
+
     constructor(context: Context) : super(context) {
         init(null, 0)
     }
@@ -109,25 +131,31 @@ class TemperatureGauge : View {
             (measuredWidth / 2).toFloat(),
             (measuredHeight / 2).toFloat(),
             getMaxRadius().toFloat(),
-            createPaint(Color.BLACK)
+            createPaint(gaugeBackgroundColor)
         )
     }
 
+    /**
+     * circle between temperatureArc and range
+     */
     private fun drawMid(canvas: Canvas) {
         canvas.drawCircle(
             (measuredWidth / 2).toFloat(),
             (measuredHeight / 2).toFloat(),
             getMaxRadius().toFloat() * 0.80F,
-            createPaint(Color.BLACK)
+            createPaint(gaugeBackgroundColor)
         )
     }
 
+    /**
+     * background of the temperature text
+     */
     private fun drawForeground(canvas: Canvas) {
         canvas.drawCircle(
             (measuredWidth / 2).toFloat(),
             (measuredHeight / 2).toFloat(),
             getMaxRadius().toFloat() * 0.35F,
-            createPaint(Color.BLACK)
+            createPaint(gaugeBackgroundColor)
         )
     }
 
@@ -192,6 +220,9 @@ class TemperatureGauge : View {
 
     }
 
+    /**
+     * arc for the temperature
+     */
     private fun drawTemperatureArc(canvas: Canvas) {
         val radius = percentageOfSize(15F)
 
@@ -206,6 +237,9 @@ class TemperatureGauge : View {
         )
     }
 
+    /**
+     * background of the temperature arc
+     */
     private fun drawTemperatureArcBackground(canvas: Canvas) {
 
         val radius = percentageOfSize(15F)
@@ -215,19 +249,22 @@ class TemperatureGauge : View {
             MIN_ANGLE,
             MAX_ANGLE,
             true,
-            createPaint(Color.GRAY)
+            createPaint(temperatureArcBackgroundColor)
         )
     }
 
+    /**
+     * draws the temperature as text
+     */
     private fun drawTemperatureText(canvas: Canvas) {
 
         val textPaint = TextPaint().apply {
             flags = Paint.ANTI_ALIAS_FLAG
             textAlign = Paint.Align.CENTER
-            color = Color.WHITE
+            color = temperatureTextColor
         }
 
-        val text = "${temperature}°C"
+        val text = temperatureRender.renderText(temperature)
         textPaint.let {
             it.textSize = getMaxSize() / 10 - it.measureText(text)
         }
@@ -240,6 +277,9 @@ class TemperatureGauge : View {
         )
     }
 
+    /**
+     * draws additional information to the temperature
+     */
     private fun drawInfoText(canvas: Canvas) {
 
         val textPaint = TextPaint().apply {
@@ -306,4 +346,8 @@ class TemperatureGauge : View {
     }
 
     private fun percentageOfSize(percent: Float) = getMaxSize() * (percent / 100)
+
+    interface TemperatureRender {
+        fun renderText(temperature: Float): String
+    }
 }
