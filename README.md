@@ -1,6 +1,8 @@
 ![](./.README/temperature-gauge-header.png)
 
-![](./.README/gauge-example.png)
+<div align="center">
+  <img height="250" src="./.README/gauge-example.png"/>
+</div>
 
 <p align="center">
     <a href="https://github.com/free-bots/TemperatureGauge/releases" alt="GitHub release (latest by date)">
@@ -108,7 +110,9 @@ gauge.temperatureTextColor = Color.YELLOW
 gauge.temperatureArcBackgroundColor = Color.WHITE
 ```
 
-![](./.README/gauge-custom-colors.png)
+<div align="center">
+  <img height="250" src="./.README/gauge-custom-colors.png"/>
+</div>
 
 ### Custom Temperature Text
 
