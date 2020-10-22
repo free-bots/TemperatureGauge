@@ -31,7 +31,7 @@
 Add the import statement to the `build.gradle` of your module:
 
 ```gradle
-implementation ''
+implementation 'com.github.free-bots:TemperatureGauge:1.0.0'
 ```
 
 ## Requirement
